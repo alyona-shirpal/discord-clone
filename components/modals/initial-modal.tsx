@@ -7,9 +7,9 @@ import {
   DialogDescription,
   DialogTitle, DialogHeader
 } from '@/components/ui/dialog'
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+//import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -58,38 +58,51 @@ export const InitialModal = () => {
           <DialogTitle className="text-2xl text-center font-bold">
             Customize your server
           </DialogTitle>
-
           <DialogDescription className="test-center text-zinc-500">
             Give your server a personality that has a name and image
           </DialogDescription>
         </DialogHeader>
+
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)}
+           className="space-y-8">
             <div className="space-y-8 px-6">
               <div className="flex items-center justify-center text-center">
-                <FormField render={({field}) => (
-                  <FormItem>
-                    <FormControl>
-                      <FileUpload
-                        endpoint="serverImage"
-                        value={field.value}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}>
-                </FormField>
+
+
+                {/*<FormField*/}
+                {/*  control={form.control}*/}
+                {/*  render={ ({field}) => (*/}
+                {/*  <FormItem>*/}
+                {/*    <FormControl>*/}
+                {/*      <FileUpload*/}
+                {/*        endpoint="serverImage"*/}
+                {/*        value={field.value}*/}
+                {/*        onChange={field.onChange}*/}
+                {/*      />*/}
+                {/*    </FormControl>*/}
+                {/*  </FormItem>*/}
+                {/*)}>*/}
+                {/*</FormField>*/}
+
                 <FormField
                   control={form.control}
                   name="imageUrl"
-                  render={({field}) => (
+                  render={ ({ field}) => (
                     <FormItem>
                       <FormControl>
-                        <FileUpload/>
+                        <FileUpload
+                        endpoint="serverImage"
+                        value={field.value}
+                        onChange={field.onChange}
+
+                        />
                       </FormControl>
                     </FormItem>
                   )}
                 />
               </div>
+
               <FormField
                 control={form.control}
                 name="name"
@@ -112,6 +125,7 @@ export const InitialModal = () => {
               >
               </FormField>
             </div>
+
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button variant="primary" disabled={isLoading}>
                 Create
